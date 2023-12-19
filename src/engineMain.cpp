@@ -12,10 +12,7 @@
 GLFWwindow* window;
 std::string* nameA;
 
-void errorCallback(int error, const char* description)
-{
-	std::cerr << "error: " << error << " : " << description << std::endl;
-}
+
 int main()
 {
 	//Set Error callback
@@ -34,7 +31,7 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	window = glfwCreateWindow(800, 600, "My App", NULL, NULL);
+	window = glfwCreateWindow(800, 600, "My App", nullptr, nullptr);
 	if (!window)
 	{
 		std::cerr << "failed to initial GlFW";
@@ -64,6 +61,11 @@ int main()
 		glfwPollEvents();
 	}
 
-
+	glfwTerminate();
 		return 0;
+}
+
+void errorCallback(int error, const char* description)
+{
+	std::cerr << "error: " << error << " : " << description << std::endl;
 }
