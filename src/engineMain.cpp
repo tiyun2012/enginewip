@@ -62,6 +62,9 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
+    //imgui variable initialization
+    float f = 0.5;
+    int intTextA = 1995;
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
@@ -73,7 +76,8 @@ int main() {
         // ImGui content
         ImGui::Begin("Demo window");
         ImGui::SliderInt("Slider", &sliderValue, 0, 100);
-        //ImGui::Text("-----text-----");
+        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+        ImGui::Text("Hello, world %d", intTextA);
         ImGui::End();
 
         // Rendering
