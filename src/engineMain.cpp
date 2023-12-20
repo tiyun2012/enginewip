@@ -51,12 +51,14 @@ int main() {
     // Get the OpenGL version
     const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
     const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    std::cout << "Renderer: " << renderer << std::endl;
-    std::cout << "OpenGL version supported: " << version << std::endl;
+    std::cout <<GREEN_TEXT<< "Renderer: " << RED_TEXT << renderer << std::endl;
+    std::cout <<GREEN_TEXT<< "OpenGL version supported: " <<RED_TEXT<< version << RESET_TEXT<<std::endl;
 
     // ImGui initialization
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
@@ -71,10 +73,13 @@ int main() {
         // ImGui content
         ImGui::Begin("Demo window");
         ImGui::SliderInt("Slider", &sliderValue, 0, 100);
+        //ImGui::Text("-----text-----");
         ImGui::End();
 
         // Rendering
+        //  ---Imgui
         ImGui::Render();
+        //  ---glfw
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
@@ -87,10 +92,11 @@ int main() {
     }
 
     // Cleanup
+    //   --imgui
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-
+    //   --glfw
     glfwDestroyWindow(window);
     glfwTerminate();
 
