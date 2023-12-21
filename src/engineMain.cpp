@@ -14,12 +14,9 @@
 //GLFW
 GLFWwindow* window;
 //imgui
-int sliderValue = 0;
 
-void errorCallback(int error, const char* description) {
-    std::cerr << RED_TEXT << "Error: " << error << " : " << description << RESET_TEXT << std::endl;
-}
-
+void errorCallback(int error, const char* description);
+void buttonCall();
 int main() {
 
     // trace glfw error
@@ -63,8 +60,9 @@ int main() {
     ImGui_ImplOpenGL3_Init("#version 330");
 
     //imgui variable initialization
-    float f = 0.5;
-    int intTextA = 1995;
+    
+    
+    
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
@@ -75,9 +73,33 @@ int main() {
 
         // ImGui content
         ImGui::Begin("Demo window");
-        ImGui::SliderInt("Slider", &sliderValue, 0, 100);
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-        ImGui::Text("Hello, world %d", intTextA);
+             static int sliderValue = 10;
+            ImGui::SliderInt("Slider", &sliderValue, 0, 100);
+            static float f = 0.5;
+            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+            const static int intTextA = 1995;
+            ImGui::Text("Hello, world %d", intTextA);
+            //const static float spacing = 4;
+            //ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(spacing, spacing));
+
+            ImGui::SameLine(0.0f,-10.0f);
+            if(ImGui::Button("run"))buttonCall();
+            // Color buttons, demonstrate using PushID() to add unique identifier in the ID stack, and changing style.
+            //IMGUI_DEMO_MARKER("Widgets/Basic/Buttons (Colored)");
+            for (int i = 0; i < 7; i++)
+            {
+                if (i > 0)
+                    ImGui::SameLine();
+                ImGui::PushID(i);
+                ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(i / 7.0f, 0.6f, 0.6f));
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(i / 7.0f, 0.7f, 0.7f));
+                ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(i / 7.0f, 0.8f, 0.8f));
+                ImGui::Button("Click");
+                ImGui::PopStyleColor(3);
+                ImGui::PopID();
+            }
+
+        //->end
         ImGui::End();
 
         // Rendering
@@ -106,3 +128,12 @@ int main() {
 
     return 0;
 }
+
+
+void errorCallback(int error, const char* description) {
+    std::cerr << RED_TEXT << "Error: " << error << " : " << description << RESET_TEXT << std::endl;
+}
+void buttonCall()
+{
+    std::cout << "run button calling" << std::endl;
+};
