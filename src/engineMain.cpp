@@ -99,6 +99,26 @@ int main() {
                 ImGui::PopID();
             }
 
+            // Set the item spacing to 10 pixels in both x and y directions
+            const static float spacing = 20;
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(sliderValue,  spacing));
+
+            // Now create some widgets
+            if (ImGui::Button("Button 1"))
+            {
+                // Handle button click
+            }
+
+            ImGui::SameLine();
+
+            if (ImGui::Button("Button 2"))
+            {
+                // Handle button click
+            }
+
+            // Don't forget to pop the style variable when you're done with it!
+            ImGui::PopStyleVar();
+
         //->end
         ImGui::End();
 
