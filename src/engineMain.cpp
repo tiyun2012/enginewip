@@ -73,6 +73,19 @@ int main() {
 
         // ImGui content
         ImGui::Begin("Demo window");
+            // menu
+            if (ImGui::BeginMainMenuBar())
+            {
+                if (ImGui::BeginMenu("File"))
+                {
+                    if (ImGui::MenuItem("Open..", "Ctrl+O")) { }
+                    if (ImGui::MenuItem("Save", "Ctrl+S")) { }
+                    if (ImGui::MenuItem("Close", "Ctrl+W"))  { glfwSetWindowShouldClose(window, 1); }
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMainMenuBar();
+            }
+
              static int sliderValue = 10;
             ImGui::SliderInt("Slider", &sliderValue, 0, 100);
             static float f = 0.5;
